@@ -51,7 +51,7 @@ app.get('/test', (req, res) => {
   res.send('Hello world!');
 });
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(userRoutes);
 
