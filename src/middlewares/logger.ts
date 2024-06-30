@@ -33,12 +33,16 @@ const errorLogger = winston.createLogger({
 
 const app = express();
 
-app.use(expressWinston.logger({
-  winstonInstance: requestLogger,
-}));
+app.use(
+  expressWinston.logger({
+    winstonInstance: requestLogger,
+  }),
+);
 
-app.use(expressWinston.errorLogger({
-  winstonInstance: errorLogger,
-}));
+app.use(
+  expressWinston.errorLogger({
+    winstonInstance: errorLogger,
+  }),
+);
 
 export { requestLogger, errorLogger };

@@ -22,4 +22,6 @@ export const ERROR_MESSAGES = {
   INVALID_TOKEN: 'Некорректный токен',
   EMAIL_EXISTS: 'Пользователь с таким email уже существует',
   INVALID_AUTHORIZATION: 'Необходима авторизация',
+  INVALID_PRODUCT_DATA: 'Переданы некорректные данные при создании продукта',
+  PRODUCT_NOT_FOUND: 'Продукт с указанным _id не найден',
 };
