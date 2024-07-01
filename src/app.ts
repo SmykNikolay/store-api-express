@@ -11,7 +11,6 @@ import userRoutes from './routes/userRoutes';
 import cardRoutes from './routes/cardRoutes';
 
 import { ERROR_MESSAGES, NotFoundError, STATUS_CODES } from './utils/errors';
-import swaggerUi from './utils/swaggerConfig';
 
 import { requestLogger, errorLogger } from './middlewares/logger';
 import categoryRoutes from './routes/categoryRoutes';
@@ -42,16 +41,14 @@ app.use(
   }),
 );
 
-app.use((err: any, req: Request, _res: Response, next: NextFunction) => {
+app.use((err: any, _req: Request, _res: Response, next: NextFunction) => {
   errorLogger.error(err);
   next(err);
 });
 
-app.get('/test', (req, res) => {
+app.get('/test', (_req, res) => {
   res.send('Hello world!');
 });
-
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(userRoutes);
 
@@ -63,11 +60,11 @@ app.use(productRoutes);
 
 app.use(errors());
 
-app.use('*', (req, res, next) => {
+app.use('*', (_req, _res, next) => {
   next(new NotFoundError(ERROR_MESSAGES.NOT_FOUND));
 });
 
-app.use((err: IError, req: Request, res: Response, next: NextFunction) => {
+app.use((err: IError, _req: Request, res: Response, next: NextFunction) => {
   res.status(err.status || STATUS_CODES.INTERNAL_SERVER_ERROR).json({
     message: err.message,
   });

@@ -1,5 +1,4 @@
 import { celebrate, Joi, Segments } from 'celebrate';
-import { describe } from 'node:test';
 
 export const signInValidation = celebrate({
   [Segments.BODY]: Joi.object().keys({
