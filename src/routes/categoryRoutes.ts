@@ -18,6 +18,7 @@ router.put(
   validate.categoryIdValidation,
   categoryController.updateCategory,
 );
+
 router.post(
   '/categories',
   validate.createCategoryValidation,

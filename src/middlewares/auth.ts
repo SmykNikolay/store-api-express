@@ -8,7 +8,7 @@ interface MyRequest extends Request {
   user?: Record<string, unknown>;
 }
 
-export default (req: MyRequest, res: Response, next: NextFunction) => {
+export default (req: MyRequest, _res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
   if (!authorization || !authorization.startsWith('Bearer ')) {
     next(new UnauthorizedError(ERROR_MESSAGES.INVALID_AUTHORIZATION));

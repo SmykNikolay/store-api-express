@@ -9,6 +9,7 @@ import { DEFAULT_PORT } from './utils/constants';
 
 import userRoutes from './routes/userRoutes';
 import cardRoutes from './routes/cardRoutes';
+import orderRoutes from './routes/orderRoutes';
 
 import { ERROR_MESSAGES, NotFoundError, STATUS_CODES } from './utils/errors';
 
@@ -25,6 +26,8 @@ const db =
   'mongodb://mestodb:DEFAULT_SECRET_KEY@localhost:27017/mestodb?authSource=admin';
 
 app.use(helmet());
+
+app.use(express.json());
 
 mongoose
   .connect(db)
@@ -57,6 +60,8 @@ app.use(cardRoutes);
 app.use(categoryRoutes);
 
 app.use(productRoutes);
+
+app.use(orderRoutes);
 
 app.use(errors());
 

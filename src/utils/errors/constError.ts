@@ -24,4 +24,6 @@ export const ERROR_MESSAGES = {
   INVALID_AUTHORIZATION: 'Необходима авторизация',
   INVALID_PRODUCT_DATA: 'Переданы некорректные данные при создании продукта',
   PRODUCT_NOT_FOUND: 'Продукт с указанным _id не найден',
+  INVALID_ORDER_DATA: 'Переданы некорректные данные при создании заказа',
+  ORDER_NOT_FOUND: 'Заказ с указанным _id не найден',
 };

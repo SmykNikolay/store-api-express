@@ -53,9 +53,9 @@ export async function deleteCard(req: MyRequest, res: Response, next: NextFuncti
       throw new NotFoundError(ERROR_MESSAGES.CARD_NOT_FOUND);
     }
     if (
-      req.user === undefined ||
-      req.user._id === undefined ||
-      !(card.owner as any).equals(req.user._id)
+      req.user === undefined
+      || req.user._id === undefined
+      || !(card.owner as any).equals(req.user._id)
     ) {
       throw new ForbiddenError(ERROR_MESSAGES.FORBIDDEN);
     }
