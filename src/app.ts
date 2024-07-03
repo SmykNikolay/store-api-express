@@ -21,13 +21,10 @@ const app = express();
 
 mongoose.set('strictQuery', true);
 
-// const db = `${DEFAULT_MONGO_DB_PATH}/${DEFAULT_MONGO_DB_NAME}`;
 const db =
   'mongodb://mestodb:DEFAULT_SECRET_KEY@localhost:27017/mestodb?authSource=admin';
 
 app.use(helmet());
-
-app.use(express.json());
 
 mongoose
   .connect(db)
@@ -68,7 +65,6 @@ app.use(errors());
 app.use('*', (_req, _res, next) => {
   next(new NotFoundError(ERROR_MESSAGES.NOT_FOUND));
 });
-
 app.use((err: IError, _req: Request, res: Response, next: NextFunction) => {
   res.status(err.status || STATUS_CODES.INTERNAL_SERVER_ERROR).json({
     message: err.message,

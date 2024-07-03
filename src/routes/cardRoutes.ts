@@ -4,21 +4,6 @@ import * as validate from '../middlewares/validation';
 
 const router = express.Router();
 
-/**
- * @swagger
- * /users:
- *   get:
- *     summary: Возвращает список пользователей
- *     responses:
- *       200:
- *         description: Список пользователей
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/User'
- */
 router.get('/cards', cardController.getAllCards);
 
 router.post('/cards', validate.createCardValidation, cardController.createCard);

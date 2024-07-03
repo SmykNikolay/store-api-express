@@ -76,3 +76,65 @@ export const createCategoryValidation = celebrate({
     description: Joi.string().min(2).max(100).required(),
   }),
 });
+
+export const orderIdValidation = celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    orderId: Joi.string().length(24).hex().required(),
+  }),
+});
+
+export const createOrderValidation = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    user_id: Joi.string().length(24).hex().required(),
+    order_date: Joi.date().required(),
+    status: Joi.string().required(),
+    total_amount: Joi.number().required(),
+    items: Joi.array()
+      .items(
+        Joi.object().keys({
+          product_id: Joi.string().length(24).hex().required(),
+          quantity: Joi.number().required(),
+          price_per_item: Joi.number().required(),
+          size: Joi.string().required(),
+          color: Joi.string().required(),
+        }),
+      )
+      .required(),
+    shipping_address: Joi.object()
+      .keys({
+        first_name: Joi.string().required(),
+        last_name: Joi.string().required(),
+        address_line_1: Joi.string().required(),
+        address_line_2: Joi.string().required(),
+        city: Joi.string().required(),
+        postal_code: Joi.string().required(),
+        country: Joi.string().required(),
+      })
+      .required(),
+  }),
+});
+
+export const updateOrderValidation = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    status: Joi.string(),
+    total_amount: Joi.number(),
+    items: Joi.array().items(
+      Joi.object().keys({
+        product_id: Joi.string().length(24).hex(),
+        quantity: Joi.number(),
+        price_per_item: Joi.number(),
+        size: Joi.string(),
+        color: Joi.string(),
+      }),
+    ),
+    shipping_address: Joi.object().keys({
+      first_name: Joi.string(),
+      last_name: Joi.string(),
+      address_line_1: Joi.string(),
+      address_line_2: Joi.string(),
+      city: Joi.string(),
+      postal_code: Joi.string(),
+      country: Joi.string(),
+    }),
+  }),
+});
