@@ -13,6 +13,7 @@ router.get(
 );
 
 router.use(auth);
+
 router.post(
   '/products',
   validate.createProductValidation,
