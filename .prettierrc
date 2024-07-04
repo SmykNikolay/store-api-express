@@ -4,7 +4,8 @@
   "trailingComma": "all",
   "arrowParens": "always",
   "tabWidth": 2,
-  "printWidth": 90,
+  "printWidth": 120,
+  "endOfLine": "lf",
   "overrides": [
     {
       "files": "*.ts",

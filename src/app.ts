@@ -22,8 +22,7 @@ const app = express();
 mongoose.set('strictQuery', true);
 
 // const db = `${DEFAULT_MONGO_DB_PATH}/${DEFAULT_MONGO_DB_NAME}`;
-const db =
-  'mongodb://mestodb:DEFAULT_SECRET_KEY@localhost:27017/mestodb?authSource=admin';
+const db = 'mongodb://mestodb:DEFAULT_SECRET_KEY@localhost:27017/mestodb?authSource=admin';
 
 app.use(helmet());
 
