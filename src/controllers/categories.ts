@@ -1,10 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import {
-  STATUS_CODES,
-  ERROR_MESSAGES,
-  NotFoundError,
-  BadRequestError,
-} from '../utils/errors';
+import { STATUS_CODES, ERROR_MESSAGES, NotFoundError, BadRequestError } from '../utils/errors';
 import Category from '../model/category';
 import { MyRequest } from '../utils/types';
 
@@ -47,7 +42,7 @@ export async function getCategory(req: Request, res: Response, next: NextFunctio
 export async function updateCategory(req: MyRequest, res: Response, next: NextFunction) {
   try {
     const category = await Category.findByIdAndUpdate(req.params.categoryId, req.body, {
-      new: true,
+      new: true
     });
     if (!category) {
       throw new NotFoundError(ERROR_MESSAGES.PRODUCT_NOT_FOUND);

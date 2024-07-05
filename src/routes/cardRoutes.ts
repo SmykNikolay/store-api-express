@@ -14,10 +14,6 @@ router.delete('/cards/:cardId', validate.cardIdValidation, cardController.delete
 
 router.put('/cards/:cardId/likes', validate.cardIdValidation, cardController.likeCard);
 
-router.delete(
-  '/cards/:cardId/likes',
-  validate.cardIdValidation,
-  cardController.dislikeCard,
-);
+router.delete('/cards/:cardId/likes', validate.cardIdValidation, cardController.dislikeCard);
 
 export default router;

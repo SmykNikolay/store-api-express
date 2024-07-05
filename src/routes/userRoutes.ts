@@ -17,16 +17,8 @@ router.get('/users/me', userController.getCurrentUser);
 
 router.get('/users/:userId', validate.userIdValidation, userController.getUserById);
 
-router.patch(
-  '/users/me/avatar',
-  validate.updateUserAvatarValidation,
-  userController.updateUserAvatar,
-);
+router.patch('/users/me/avatar', validate.updateUserAvatarValidation, userController.updateUserAvatar);
 
-router.patch(
-  '/users/:userId',
-  validate.updateUserProfileValidation,
-  userController.updateUserProfile,
-);
+router.patch('/users/:userId', validate.updateUserProfileValidation, userController.updateUserProfile);
 
 export default router;

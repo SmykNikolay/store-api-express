@@ -12,9 +12,9 @@ const requestLogger = winston.createLogger({
       datePattern: 'YYYY-MM-DD',
       maxSize: '20m',
       zippedArchive: true,
-      maxFiles: '14d',
-    }),
-  ],
+      maxFiles: '14d'
+    })
+  ]
 });
 
 const errorLogger = winston.createLogger({
@@ -26,23 +26,23 @@ const errorLogger = winston.createLogger({
       datePattern: 'YYYY-MM-DD',
       maxSize: '20m',
       zippedArchive: true,
-      maxFiles: '14d',
-    }),
-  ],
+      maxFiles: '14d'
+    })
+  ]
 });
 
 const app = express();
 
 app.use(
   expressWinston.logger({
-    winstonInstance: requestLogger,
-  }),
+    winstonInstance: requestLogger
+  })
 );
 
 app.use(
   expressWinston.errorLogger({
-    winstonInstance: errorLogger,
-  }),
+    winstonInstance: errorLogger
+  })
 );
 
 export { requestLogger, errorLogger };

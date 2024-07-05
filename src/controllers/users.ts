@@ -8,7 +8,7 @@ import {
   UnauthorizedError,
   NotFoundError,
   BadRequestError,
-  ConflictError,
+  ConflictError
 } from '../utils/errors';
 
 import { MyRequest } from '../utils/types';
@@ -50,16 +50,18 @@ export async function createUser(req: Request, res: Response, next: NextFunction
     const user = new User({ password: hashedPassword, ...rest });
     await user.save();
     const userResponse = user.toObject();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _, ...userWithoutPassword } = userResponse;
     return res.status(STATUS_CODES.CREATED).send(userWithoutPassword);
   } catch (err) {
-    if ((err as any).code === 11000) {
+    const error = err as Error & { code?: number };
+    if (error.code === 11000) {
       return next(new ConflictError(ERROR_MESSAGES.EMAIL_EXISTS));
     }
-    if ((err as Error).name === 'ValidationError') {
+    if (error.name === 'ValidationError') {
       return next(new BadRequestError(ERROR_MESSAGES.INVALID_USER_DATA));
     }
-    return next(err);
+    return next(error);
   }
 }
 
@@ -71,7 +73,7 @@ export async function updateUserProfile(req: MyRequest, res: Response, next: Nex
   try {
     const user = await User.findByIdAndUpdate(req.user._id, req.body, {
       new: true,
-      runValidators: true,
+      runValidators: true
     });
     if (!user) {
       next(new NotFoundError(ERROR_MESSAGES.NOT_FOUND));
@@ -96,7 +98,7 @@ export async function updateUserAvatar(req: MyRequest, res: Response, next: Next
     const user = await User.findByIdAndUpdate(
       req.user._id,
       { avatar: req.body.avatar },
-      { new: true, runValidators: true },
+      { new: true, runValidators: true }
     );
     if (!user) {
       next(new NotFoundError(ERROR_MESSAGES.NOT_FOUND));
@@ -128,7 +130,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       maxAge: 3600000 * 24 * 7,
       httpOnly: true,
       sameSite: 'none',
-      secure: true,
+      secure: true
     });
     return res.send({ token });
   } catch (err) {

@@ -5,7 +5,7 @@ import {
   UnauthorizedError,
   ForbiddenError,
   NotFoundError,
-  BadRequestError,
+  BadRequestError
 } from '../utils/errors';
 import Card from '../model/card';
 import { MyRequest } from '../utils/types';
@@ -52,11 +52,8 @@ export async function deleteCard(req: MyRequest, res: Response, next: NextFuncti
     if (!card) {
       throw new NotFoundError(ERROR_MESSAGES.CARD_NOT_FOUND);
     }
-    if (
-      req.user === undefined
-      || req.user._id === undefined
-      || !(card.owner as any).equals(req.user._id)
-    ) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (req.user === undefined || req.user._id === undefined || !(card.owner as any).equals(req.user._id)) {
       throw new ForbiddenError(ERROR_MESSAGES.FORBIDDEN);
     }
     await Card.deleteOne({ _id: req.params.cardId });
@@ -74,11 +71,7 @@ export async function likeCard(req: MyRequest, res: Response, next: NextFunction
     if (req.user === undefined || req.user._id === undefined) {
       throw new UnauthorizedError(ERROR_MESSAGES.USER_NOT_AUTHORIZED);
     }
-    const card = await Card.findByIdAndUpdate(
-      req.params.cardId,
-      { $addToSet: { likes: req.user._id } },
-      { new: true },
-    );
+    const card = await Card.findByIdAndUpdate(req.params.cardId, { $addToSet: { likes: req.user._id } }, { new: true });
     if (!card) {
       throw new NotFoundError(ERROR_MESSAGES.INVALID_CARD_ID);
     }
@@ -96,11 +89,7 @@ export async function dislikeCard(req: MyRequest, res: Response, next: NextFunct
     if (req.user === undefined || req.user._id === undefined) {
       throw new UnauthorizedError(ERROR_MESSAGES.USER_NOT_AUTHORIZED);
     }
-    const card = await Card.findByIdAndUpdate(
-      req.params.cardId,
-      { $pull: { likes: req.user._id } },
-      { new: true },
-    );
+    const card = await Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, { new: true });
     if (!card) {
       throw new NotFoundError(ERROR_MESSAGES.INVALID_CARD_ID);
     }

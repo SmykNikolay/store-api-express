@@ -38,8 +38,8 @@ const OrderSchema = new Schema<IOrder>({
       quantity: { type: Number, required: true },
       price_per_item: { type: Number, required: true },
       size: { type: String, required: true },
-      color: { type: String, required: true },
-    },
+      color: { type: String, required: true }
+    }
   ],
   shipping_address: {
     first_name: { type: String, required: true },
@@ -48,8 +48,8 @@ const OrderSchema = new Schema<IOrder>({
     address_line_2: { type: String, required: true },
     city: { type: String, required: true },
     postal_code: { type: String, required: true },
-    country: { type: String, required: true },
-  },
+    country: { type: String, required: true }
+  }
 });
 
 const Order = mongoose.model<IOrder>('Order', OrderSchema);

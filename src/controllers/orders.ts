@@ -1,10 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import {
-  STATUS_CODES,
-  ERROR_MESSAGES,
-  NotFoundError,
-  BadRequestError,
-} from '../utils/errors';
+import { STATUS_CODES, ERROR_MESSAGES, NotFoundError, BadRequestError } from '../utils/errors';
 import Order from '../model/order';
 import { MyRequest } from '../utils/types';
 
@@ -47,7 +42,7 @@ export async function getOrder(req: Request, res: Response, next: NextFunction) 
 export async function updateOrder(req: MyRequest, res: Response, next: NextFunction) {
   try {
     const order = await Order.findByIdAndUpdate(req.params.orderId, req.body, {
-      new: true,
+      new: true
     });
     if (!order) {
       throw new NotFoundError(ERROR_MESSAGES.ORDER_NOT_FOUND);

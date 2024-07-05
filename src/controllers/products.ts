@@ -1,10 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import {
-  STATUS_CODES,
-  ERROR_MESSAGES,
-  NotFoundError,
-  BadRequestError,
-} from '../utils/errors';
+import { STATUS_CODES, ERROR_MESSAGES, NotFoundError, BadRequestError } from '../utils/errors';
 import Product from '../model/product';
 import { MyRequest } from '../utils/types';
 
@@ -47,7 +42,7 @@ export async function getProduct(req: Request, res: Response, next: NextFunction
 export async function updateProduct(req: MyRequest, res: Response, next: NextFunction) {
   try {
     const product = await Product.findByIdAndUpdate(req.params.productId, req.body, {
-      new: true,
+      new: true
     });
     if (!product) {
       throw new NotFoundError(ERROR_MESSAGES.PRODUCT_NOT_FOUND);
@@ -73,5 +68,14 @@ export async function deleteProduct(req: MyRequest, res: Response, next: NextFun
       return next(new BadRequestError(ERROR_MESSAGES.INVALID_ID));
     }
     return next(err);
+  }
+}
+
+export async function uploadFile(req: MyRequest, res: Response, next: NextFunction) {
+  try {
+    // Здесь логика обработки файла, например, сохранение информации о файле в базе данных
+    res.send({ message: 'Файл успешно загружен', file: req.file });
+  } catch (err) {
+    next(err);
   }
 }

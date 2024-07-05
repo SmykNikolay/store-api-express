@@ -11,15 +11,7 @@ router.use(auth);
 
 router.get('/orders', orderController.getAllOrders);
 
-router.put(
-  '/orders/:orderId',
-  validate.updateOrderValidation,
-  orderController.updateOrder,
-);
-router.delete(
-  '/orders/:orderId',
-  validate.orderIdValidation,
-  orderController.deleteOrder,
-);
+router.put('/orders/:orderId', validate.updateOrderValidation, orderController.updateOrder);
+router.delete('/orders/:orderId', validate.orderIdValidation, orderController.deleteOrder);
 
 export default router;
