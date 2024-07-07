@@ -36,9 +36,9 @@ app.use(express.json());
 app.use(
   morgan('tiny', {
     stream: {
-      write: (message: string) => requestLogger.info(message.trim()),
-    },
-  }),
+      write: (message: string) => requestLogger.info(message.trim())
+    }
+  })
 );
 
 app.use((err: any, _req: Request, _res: Response, next: NextFunction) => {
@@ -65,9 +65,10 @@ app.use(errors());
 app.use('*', (_req, _res, next) => {
   next(new NotFoundError(ERROR_MESSAGES.NOT_FOUND));
 });
+
 app.use((err: IError, _req: Request, res: Response, next: NextFunction) => {
   res.status(err.status || STATUS_CODES.INTERNAL_SERVER_ERROR).json({
-    message: err.message,
+    message: err.message
   });
   next();
 });
